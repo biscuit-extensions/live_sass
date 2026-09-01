@@ -1,7 +1,27 @@
 [extension]
 id = "live_sass"
 name = "Live Sass Compiler"
-version = "0.1.0"
-description = "Compile Sass and SCSS files to CSS with live reload and sourcemap support"
-author = "biscuit-extensions"
+version = "0.2.0"
+description = "Sass and SCSS compilation to CSS with auto-watch on save and source map generation"
+author = "tomlin7"
 icon = "icon.png"
+repository = "https://github.com/biscuit-extensions/live_sass"
+
+[dependencies]
+python = [
+    "libsass>=0.23.0"
+]
+tools = [
+    "sass",
+    "node"
+]
+
+[contributes]
+commands = [
+    { id = "live_sass.compile_current", title = "Live Sass: Compile Current File" },
+    { id = "live_sass.toggle_watch", title = "Live Sass: Watch / Stop Watching Sass" }
+]
+settings = [
+    { id = "live_sass.generateSourceMap", type = "boolean", default = true, description = "Generate CSS source map file (.map)" },
+    { id = "live_sass.style", type = "string", default = "expanded", description = "Output CSS style: expanded or compressed" }
+]

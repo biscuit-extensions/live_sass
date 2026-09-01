@@ -10,4 +10,6 @@ if typing.TYPE_CHECKING:
 
 def setup(api: ExtensionsAPI) -> None:
     """Entrypoint for Biscuit to load the extension."""
-    api.register("live_sass", LiveSass(api))
+    ext = LiveSass(api)
+    api.register("live_sass", ext)
+    ext.install()

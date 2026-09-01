@@ -1,8 +1,8 @@
 [tool.poetry]
 name = "live_sass"
-version = "0.1.0"
-description = "Compile Sass and SCSS files to CSS with live reload and sourcemap support"
-authors = ["biscuit-extensions"]
+version = "0.2.0"
+description = "Sass and SCSS compilation to CSS with auto-watch on save and source map generation"
+authors = ["tomlin7"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
