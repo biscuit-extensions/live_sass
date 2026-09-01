@@ -1,0 +1,7 @@
+[extension]
+id = "live_sass"
+name = "Live Sass Compiler"
+version = "0.1.0"
+description = "Compile Sass and SCSS files to CSS with live reload and sourcemap support"
+author = "biscuit-extensions"
+icon = "icon.png"
