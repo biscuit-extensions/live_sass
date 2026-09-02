@@ -318,8 +318,28 @@ class LiveSass(Extension):
         output_path: str | Path | None = None,
         style: str = "expanded",
         source_map: bool = True,
-    ) -> tuple[str, Path, Path | None]:
+    ) -> tuple[str, Path, Path | None] | str:
         """Compile a Sass/SCSS file on disk, writing CSS and source maps."""
+        # If input_path is a raw SCSS code string rather than a file on disk
+        is_string_source = False
+        if isinstance(input_path, str):
+            if "\n" in input_path or "{" in input_path or ";" in input_path or "$" in input_path:
+                is_string_source = True
+            elif not Path(input_path).exists():
+                is_string_source = True
+
+        if is_string_source:
+            try:
+                inp_check = Path(input_path).resolve()
+                if inp_check.exists() and inp_check.is_file():
+                    is_string_source = False
+            except Exception:
+                is_string_source = True
+
+        if is_string_source:
+            css_text, _ = self.compile_string(str(input_path), filename="input.scss", style=style, source_map=source_map)
+            return css_text
+
         inp = Path(input_path).resolve()
         if not inp.exists():
             raise FileNotFoundError(f"Source file not found: {inp}")
